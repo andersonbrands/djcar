@@ -23,3 +23,19 @@ def test_template(add_resp):
 def test_form_in_context(add_resp):
     form = add_resp.context["form"]
     assert isinstance(form, CarForm)
+
+
+@pytest.mark.parametrize(
+    "expected, count",
+    [
+        # csrf
+        ("csrfmiddlewaretoken", 1),
+        # form and input tags
+        ("<form", 1),
+        ("<input", 5),
+        ("<select", 2),
+        ('type="submit"', 1),
+    ],
+)
+def test_contains(add_resp, expected, count):
+    assertContains(add_resp, expected, count)

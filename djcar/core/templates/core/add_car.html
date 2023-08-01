@@ -4,6 +4,21 @@
 
     <div>Add Car</div>
 
-    {{ form }}
+    <form id="add-car-form" method="POST">
+        {% csrf_token %}
+
+        <table class="table table-borderless table-responsive">
+            {{ form.as_table }}
+        </table>
+
+    </form>
+
+    <div class="col-3 m-auto">
+        <a href="{% url 'home' %}" class="float-start">
+            <button type="button" class="btn btn-primary">Cancel</button>
+        </a>
+
+        <button form="add-car-form" type="submit" class="btn btn-primary">Submit</button>
+    </div>
 
 {% endblock %}

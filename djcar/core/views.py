@@ -16,3 +16,7 @@ class AddCarView(FormView):
     form_class = CarForm
     template_name = "core/add_car.html"
     success_url = "."
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
