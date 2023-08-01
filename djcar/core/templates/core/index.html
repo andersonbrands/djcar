@@ -12,8 +12,6 @@
 {% endblock %}
 
 {% block content %}
-    Hi
-
     <div class="mb-4">
         <a href="{% url 'add' %}">
             <button type="button" class="btn btn-primary">Add</button>
@@ -22,11 +20,13 @@
 
     {% if formset.forms %}
         <div>
-            <button id="update-button" type="button" class="btn btn-primary mb-2">Update</button>
+            {% if not request.POST %}
+                <button id="update-button" type="button" class="btn btn-primary mb-2">Update</button>
+            {% endif %}
 
             <a href=".">
                 <button id="cancel-button" type="button"
-                        class="hidden btn btn-primary">Cancel
+                        class="{% if not request.POST %}hidden{% endif %} btn btn-primary">Cancel
                 </button>
             </a>
             <button id="save-button" form="cars-form" type="submit"

@@ -7,7 +7,7 @@
 {{ formset.non_form_errors }}
 
 
-<table id="form-table" class="table table-responsive readonly">
+<table id="form-table" class="table table-responsive {% if request.POST %}editable{% else %}readonly{% endif %}">
     {% for form in formset %}
         {% if forloop.first %}
             <thead>
