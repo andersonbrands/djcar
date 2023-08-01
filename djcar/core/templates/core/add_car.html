@@ -2,7 +2,9 @@
 
 {% block content %}
 
-    <div>Add Car</div>
+    <div class="alert alert-primary" role="alert">
+        Add Car
+    </div>
 
     {% if messages %}
         {% for message in messages %}
@@ -13,14 +15,18 @@
         {% endfor %}
     {% endif %}
 
-    <form id="add-car-form" method="POST">
-        {% csrf_token %}
+    <div class="col-5 ms-auto me-auto">
+        <form id="add-car-form" method="POST">
+            {% csrf_token %}
 
-        <table class="table table-borderless table-responsive">
-            {{ form.as_table }}
-        </table>
+            <table class="table table-borderless table-responsive">
+                {{ form.as_table }}
+            </table>
 
-    </form>
+        </form>
+    </div>
+
+
 
     <div class="col-3 m-auto">
         <a href="{% url 'home' %}" class="float-start">
