@@ -7,3 +7,8 @@ from django.views import View
 class Home(View):
     def get(self, request):
         return render(request, "core/index.html")
+
+
+class AddCarView(View):
+    def get(self, request):
+        return render(request, "core/add_car.html")
