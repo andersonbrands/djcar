@@ -1,7 +1,17 @@
+import pytest
 from django.urls import reverse
+from pytest_django.asserts import assertTemplateUsed
 
 
-def test_get(client):
+@pytest.fixture
+def home_resp(client):
     url = reverse("home")
-    resp = client.get(url)
-    assert 200 == resp.status_code
+    yield client.get(url)
+
+
+def test_get(home_resp):
+    assert 200 == home_resp.status_code
+
+
+def test_template(home_resp):
+    assertTemplateUsed(home_resp, "core/index.html")
