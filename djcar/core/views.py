@@ -1,6 +1,9 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views import View
+from django.views.generic import FormView
+
+from djcar.core.forms import CarForm
 
 
 # Create your views here.
@@ -9,6 +12,7 @@ class Home(View):
         return render(request, "core/index.html")
 
 
-class AddCarView(View):
-    def get(self, request):
-        return render(request, "core/add_car.html")
+class AddCarView(FormView):
+    form_class = CarForm
+    template_name = "core/add_car.html"
+    success_url = "."
