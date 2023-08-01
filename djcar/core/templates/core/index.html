@@ -1,6 +1,15 @@
 {% extends 'core/base.html' %}
 
+{% load static %}
+
 {% block title %}Home{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock %}
+{% block scripts %}
+    <script src="{% static 'js/index.js' %}"></script>
+{% endblock %}
 
 {% block content %}
     Hi
@@ -12,7 +21,26 @@
     </div>
 
     {% if formset.forms %}
-        {# TODO: handle formset #}
+        <div>
+            <button id="update-button" type="button" class="btn btn-primary mb-2">Update</button>
+
+            <a href=".">
+                <button id="cancel-button" type="button"
+                        class="hidden btn btn-primary">Cancel
+                </button>
+            </a>
+            <button id="save-button" form="cars-form" type="submit"
+                    class="{% if not request.POST %}hidden{% endif %} btn btn-primary">Save
+            </button>
+        </div>
+
+        <form id="cars-form" method="POST">
+            {% csrf_token %}
+
+            {{ formset.management_form }}
+
+            {% include "core/cars_formset_table.html" %}
+        </form>
     {% else %}
         <div class="alert alert-primary" role="alert">
             No cars registered yet, use the button above to add

@@ -1,0 +1,16 @@
+
+#form-table.editable .item-readonly {
+    display: none;
+}
+
+#form-table.readonly .item-editable {
+    display: none;
+}
+
+#cancel-button {
+    float: left;
+}
+
+#save-button {
+    float: right;
+}

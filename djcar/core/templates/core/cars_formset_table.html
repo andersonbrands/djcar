@@ -1,0 +1,44 @@
+{% for form in formset %}
+    {% for field in form.hidden_fields %}
+        {{ field }}
+    {% endfor %}
+{% endfor %}
+
+{{ formset.non_form_errors }}
+
+
+<table id="form-table" class="table table-responsive editable">
+    {% for form in formset %}
+        {% if forloop.first %}
+            <thead>
+            <tr>
+                {% for field in form.visible_fields %}
+                    <th>{{ field.label }}</th>
+                {% endfor %}
+                <th>Total</th>
+            </tr>
+            </thead>
+        {% endif %}
+
+        <tbody>
+
+        <tr>
+            {% for field in form.visible_fields %}
+                <td class="item-readonly">
+                    {{ field.value }}
+                </td>
+
+                <td class="item-editable">
+                    {{ field }}
+                    {% if field.errors %}
+                        <div class="text-danger">{{ field.errors|first }}</div>
+                    {% endif %}
+                </td>
+
+            {% endfor %}
+            <td class="item-readonly">${{ form.production_cost.value | add:form.transportation_cost.value }}</td>
+            <td class="item-editable dynamic-total">{{ form.production_cost.value | add:form.transportation_cost.value }}</td>
+        </tr>
+        </tbody>
+    {% endfor %}
+</table>
