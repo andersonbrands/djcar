@@ -4,13 +4,16 @@ from django.shortcuts import render
 from django.views import View
 from django.views.generic import FormView
 
-from djcar.core.forms import CarForm
+from djcar.core.forms import CarForm, CarFormSet
 
 
 # Create your views here.
 class Home(View):
+    formset_class = CarFormSet
+
     def get(self, request):
-        return render(request, "core/index.html")
+        context = {"formset": self.formset_class()}
+        return render(request, "core/index.html", context)
 
 
 class AddCarView(FormView):

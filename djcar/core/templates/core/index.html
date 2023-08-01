@@ -10,4 +10,13 @@
             <button type="button" class="btn btn-primary">Add</button>
         </a>
     </div>
+
+    {% if formset.forms %}
+        {# TODO: handle formset #}
+    {% else %}
+        <div class="alert alert-primary" role="alert">
+            No cars registered yet, use the button above to add
+        </div>
+    {% endif %}
+
 {% endblock content %}

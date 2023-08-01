@@ -2,6 +2,10 @@ import pytest
 from django.urls import reverse
 from pytest_django.asserts import assertContains, assertTemplateUsed
 
+from djcar.core.forms import CarFormSet
+
+pytestmark = pytest.mark.django_db
+
 
 @pytest.fixture
 def home_resp(client):
@@ -33,3 +37,12 @@ def test_template(home_resp):
 )
 def test_contains(home_resp, expected):
     assertContains(home_resp, expected)
+
+
+def test_formset(home_resp):
+    formset = home_resp.context["formset"]
+    assert isinstance(formset, CarFormSet)
+
+
+def test_no_cars_alert(home_resp):
+    assertContains(home_resp, "No cars registered yet, use the button above to add")
