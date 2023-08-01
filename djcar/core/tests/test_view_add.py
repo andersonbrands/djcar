@@ -39,3 +39,17 @@ def test_form_in_context(add_resp):
 )
 def test_contains(add_resp, expected, count):
     assertContains(add_resp, expected, count)
+
+
+@pytest.mark.django_db
+def test_post_valid(client, valid_car_dict):
+    url = reverse("add")
+    resp = client.post(url, valid_car_dict, follow=True)
+    assertContains(resp, "Success")
+
+
+@pytest.mark.django_db
+def test_post_invalid(client, invalid_car_dict):
+    url = reverse("add")
+    resp = client.post(url, invalid_car_dict, follow=True)
+    assertContains(resp, "Success", count=0)

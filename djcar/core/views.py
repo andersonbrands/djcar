@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views import View
@@ -19,4 +20,5 @@ class AddCarView(FormView):
 
     def form_valid(self, form):
         form.save()
+        messages.success(self.request, "Success")
         return super().form_valid(form)
