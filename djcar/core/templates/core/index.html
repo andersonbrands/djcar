@@ -3,5 +3,11 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-Hi
+    Hi
+
+    <div class="mb-4">
+        <a href="{% url 'add' %}">
+            <button type="button" class="btn btn-primary">Add</button>
+        </a>
+    </div>
 {% endblock content %}
